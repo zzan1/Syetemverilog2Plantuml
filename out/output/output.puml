@@ -1,0 +1,2067 @@
+@startuml
+class tvip_axi_sample_configuration extends tue_configuration {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_sample_configuration")
+	+void pre_randomize()
+	+constraint c_axi_basic
+	+constraint c_request_start_delay
+	+constraint c_write_data_delay
+	+constraint c_response_weight
+	+constraint c_response_start_delay
+	+constraint c_response_delay
+	+constraint c_ready_delay
+	+constraint c_response_ordering
+	+constraint c_read_interleave
+	+bit enable_request_start_delay
+	+bit enable_write_data_delay
+	+bit enable_response_start_delay
+	+bit enable_response_delay
+	+bit enable_ready_delay
+	+bit enable_out_of_order_response
+	+bit enable_read_interleave
+	+tvip_axi_configuration axi_cfg[2]
+}
+class tvip_axi_sample_test extends tue_test {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_sample_test", uvm_component parent = null)
+	+void create_configuration()
+	+void build_phase(uvm_phase phase)
+	+void connect_phase(uvm_phase phase)
+	+void end_of_elaboration_phase(uvm_phase phase)
+	+tvip_axi_master_agent master_agent
+	+tvip_axi_master_sequencer master_sequencer
+	+tvip_axi_slave_agent slave_agent
+	+tvip_axi_slave_sequencer slave_sequencer
+}
+class tvip_axi_sample_write_read_sequence extends tvip_axi_master_sequence_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_sample_write_read_sequence")
+	+body()
+	+do_basic_write_read_access()
+	+do_write_read_access_by_sequence(int index)
+	+do_write_read_access_by_item(int index)
+	+wait_for_response(    input   tvip_axi_item request,    output  tvip_axi_item response  )
+	+tvip_axi_address get_address_mask(int burst_size)
+	+tvip_axi_address address_mask[int]
+	+int byte_width
+	+int byte_offset
+	+byte write_byte
+	+byte read_byte
+	+begin continue
+	+return 0
+	+return 1
+}
+class tvip_axi_agent_base extends tue_agent {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+void build_phase(uvm_phase phase)
+	+void connect_phase(uvm_phase phase)
+	+SEQUENCER sequencer
+	#WRITE_MONITOR write_monitor
+	#READ_MONITOR read_monitor
+	#DRIVER driver
+}
+class tvip_axi_component_base extends BASE {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+void build_phase(uvm_phase phase)
+	#bit is_write_component()
+	#bit is_read_component()
+	+{abstract}begin_address(tvip_axi_item item)
+	+{abstract}end_address(tvip_axi_item item)
+	+{abstract}begin_write_data(tvip_axi_item item)
+	+{abstract}end_write_data(tvip_axi_item item)
+	+{abstract}begin_response(tvip_axi_item item)
+	+{abstract}end_response(tvip_axi_item item)
+	#bit write_component
+	#tvip_axi_vif vif
+}
+class tvip_axi_configuration extends tue_configuration {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_configuration")
+	+void post_randomize()
+	+constraint c_default_protocol
+	+constraint c_valid_id_width
+	+constraint c_default_id_width
+	+constraint c_valid_address_width
+	+constraint c_valid_max_burst_length
+	+constraint c_valid_data_width
+	+constraint c_valid_strobe_width
+	+constraint c_valid_qos_range
+	+constraint c_default_qos_range
+	+constraint c_valid_response_ordering
+	+constraint c_default_response_ordering
+	+constraint c_valid_outstanding_responses
+	+constraint c_default_outstanding_responses
+	+constraint c_default_enable_response_interleaving
+	+constraint c_valid_interleave_size
+	+constraint c_default_interleave_size
+	+constraint c_valid_response_weight
+	+constraint c_default_response_weight
+	+constraint c_default_reset_by_agent
+	+tvip_axi_vif vif
+	+tvip_axi_protocol protocol
+	+int id_width
+	+int address_width
+	+int max_burst_length
+	+int data_width
+	+int strobe_width
+	+int qos_range[2]
+	+tvip_axi_ordering_mode response_ordering
+	+int outstanding_responses
+	+bit enable_response_interleaving
+	+int min_interleave_size
+	+int max_interleave_size
+	+int response_weight_okay
+	+int response_weight_exokay
+	+int response_weight_slave_error
+	+int response_weight_decode_error
+	+tvip_delay_configuration request_start_delay
+	+tvip_delay_configuration write_data_delay
+	+tvip_delay_configuration response_start_delay
+	+tvip_delay_configuration response_delay
+	+bit default_awready
+	+tvip_delay_configuration awready_delay
+	+bit default_wready
+	+tvip_delay_configuration wready_delay
+	+bit default_bready
+	+tvip_delay_configuration bready_delay
+	+bit default_arready
+	+tvip_delay_configuration arready_delay
+	+bit default_rready
+	+tvip_delay_configuration rready_delay
+	+bit reset_by_agent
+	+before id_width
+	+before max_burst_length
+	+before data_width
+	+before strobe_width
+	+before qos_range
+	+before response_ordering
+}
+class tvip_axi_sub_driver_base extends tue_component {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_sub_driver_base", uvm_component parent = null)
+	+{abstract}put_request(tvip_axi_item request)
+	+{abstract}put_response(tvip_axi_item response)
+}
+class tvip_axi_driver_base extends tue_driver {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+void build_phase(uvm_phase phase)
+	+run_phase(uvm_phase phase)
+	#WRITE_DRIVER write_driver
+	#READ_DRIVER read_driver
+}
+class tvip_axi_item extends tue_sequence_item {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_item")
+	+bit do_compare(uvm_object rhs, uvm_comparer comparer)
+	+bit is_write()
+	+bit is_read()
+	+int get_burst_length()
+	+tvip_axi_burst_length get_packed_burst_length()
+	+void set_packed_burst_length(tvip_axi_burst_length packed_burst_length)
+	+int get_burst_size()
+	+tvip_axi_burst_size get_packed_burst_size()
+	+void set_packed_burst_size(tvip_axi_burst_size packed_burst_size)
+	+tvip_axi_cache get_cache()
+	+void put_cache(tvip_axi_cache cache)
+	+tvip_axi_data get_data(int index)
+	+tvip_axi_strobe get_strobe(int index)
+	+tvip_axi_response get_response(int index)
+	+bit request_began()
+	+bit request_ended()
+	+wait_for_done()
+	+wait_for_request_done()
+	+constraint c_valid_id
+	+constraint c_valid_address
+	+constraint c_valid_burst_length
+	+constraint c_valid_burst_size
+	+constraint c_4kb_boundary
+	+constraint c_valid_memory_type
+	+constraint c_valid_qos
+	+constraint c_valid_write_data
+	+constraint c_valid_strobe
+	+constraint c_address_start_delay
+	+constraint c_write_data_delay
+	+constraint c_response_ready_delay
+	+constraint c_valid_read_data
+	+constraint c_valid_response
+	+constraint c_address_ready_delay
+	+constraint c_write_data_ready_delay
+	+constraint c_response_start_delay
+	+constraint c_response_delay
+	+tvip_axi_access_type access_type
+	+tvip_axi_id id
+	+tvip_axi_address address
+	+int burst_length
+	+int burst_size
+	+tvip_axi_burst_type burst_type
+	+tvip_axi_memory_type memory_type
+	+tvip_axi_protection protection
+	+tvip_axi_qos qos
+	+tvip_axi_data data[]
+	+tvip_axi_strobe strobe[]
+	+tvip_axi_response response[]
+	+int start_delay
+	+int write_data_delay[]
+	+int response_delay[]
+	+int address_ready_delay
+	+int write_data_ready_delay[]
+	+int response_ready_delay[]
+	+uvm_event address_begin_event
+	+time address_begin_time
+	+uvm_event address_end_event
+	+time address_end_time
+	+uvm_event write_data_begin_event
+	+time write_data_begin_time
+	+uvm_event write_data_end_event
+	+time write_data_end_time
+	+uvm_event response_begin_event
+	+time response_begin_time
+	+uvm_event response_end_event
+	+time response_end_time
+	+bit need_response
+	+: begin_time
+	+: end_time
+	+before data
+	+before data
+	+before strobe
+	+before strobe
+	+before write_data_delay
+	+before response_ready_delay
+}
+class tvip_axi_master_item extends tvip_axi_item {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+void pre_randomize()
+	+constraint c_default_need_response
+}
+class tvip_axi_slave_item extends tvip_axi_item {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+void pre_randomize()
+	+constraint c_default_need_response
+}
+class tvip_axi_master_access_sequence extends tvip_axi_master_sequence_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_master_access_sequence")
+	+bit do_compare(uvm_object rhs, uvm_comparer comparer)
+	+body()
+	+transmit_request()
+	+void copy_request_info()
+	+wait_for_response()
+	+void copy_response_info()
+	+constraint c_valid_id
+	+constraint c_valid_address
+	+constraint c_valid_burst_length
+	+constraint c_valid_burst_size
+	+constraint c_4kb_boundary
+	+constraint c_default_burst_type
+	+constraint c_valid_memory_type
+	+constraint c_valid_qos
+	+constraint c_valid_data
+	+constraint c_valid_strobe
+	+constraint c_start_delay
+	+constraint c_write_data_delay
+	+constraint c_response_ready
+	+tvip_axi_access_type access_type
+	+tvip_axi_id id
+	+tvip_axi_address address
+	+int burst_length
+	+int burst_size
+	+tvip_axi_burst_type burst_type
+	+tvip_axi_memory_type memory_type
+	+tvip_axi_protection protection
+	+tvip_axi_qos qos
+	+tvip_axi_data data[]
+	+tvip_axi_strobe strobe[]
+	+tvip_axi_response response[]
+	+int start_delay
+	+int write_data_delay[]
+	+int response_ready_delay[]
+	+uvm_event address_done_event
+	+uvm_event write_data_done_event
+	+uvm_event response_done_event
+	#tvip_axi_master_item request_item
+	#tvip_axi_master_item response_item
+	+before data
+	+before data
+	+before strobe
+	+before strobe
+	+before write_data_delay
+	+before response_ready_delay
+}
+class tvip_axi_master_agent_base extends tvip_axi_agent_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_master_agent extends tvip_axi_master_agent_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_request_item_queue extends tue_fifo {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_master_sub_driver_base extends tvip_axi_sub_driver_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_master_sub_driver extends tvip_axi_component_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+void build_phase(uvm_phase phase)
+	+run_phase(uvm_phase phase)
+	+end_response(tvip_axi_item item)
+	+put_request(tvip_axi_item request)
+	#{abstract}do_reset()
+	#{abstract}reset_if()
+	#main()
+	#address_thread()
+	#{abstract}drive_address(    bit           valid,    tvip_axi_item item  )
+	#wait_for_address_ready()
+	#{abstract}bit get_address_ready()
+	#write_data_thread()
+	#{abstract}drive_write_data(    bit           valid,    tvip_axi_item item,    int           index  )
+	#wait_for_write_data_ready()
+	#response_thread()
+	#wait_for_response_valid()
+	#{abstract}bit get_response_valid()
+	#{abstract}tvip_axi_id get_response_id()
+	#{abstract}tvip_axi_data get_response_data()
+	#{abstract}tvip_axi_response get_response_status()
+	#{abstract}logic get_response_last()
+	#bit is_valid_response(tvip_axi_id id)
+	#int get_response_ready_delay(tvip_axi_id id)
+	#{abstract}drive_response_ready(bit ready)
+	#sample_response(    input tvip_axi_id id,    ref   bit         busy  )
+	#get_item_from_queue(    input tvip_axi_request_item_queue queue,    ref   tvip_axi_item               item  )
+	#consume_delay(int delay)
+	#tvip_axi_request_item_queue address_queue
+	#tvip_axi_request_item_queue write_data_queue
+	#tvip_axi_payload_store response_stores[tvip_axi_id][$]
+	#bit default_response_ready
+}
+class tvip_axi_master_write_driver extends tvip_axi_master_sub_driver {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_master_write_driver", uvm_component parent = null)
+	+void build_phase(uvm_phase phase)
+	#reset_if()
+	#drive_address(    bit           valid,    tvip_axi_item item  )
+	#bit get_address_ready()
+	#bit get_response_valid()
+	#tvip_axi_id get_response_id()
+	#tvip_axi_data get_response_data()
+	#tvip_axi_response get_response_status()
+	#logic get_response_last()
+	#drive_response_ready(bit ready)
+}
+class tvip_axi_master_read_driver extends tvip_axi_master_sub_driver {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_master_read_driver", uvm_component parent = null)
+	+void build_phase(uvm_phase phase)
+	#reset_if()
+	#drive_address(    bit           valid,    tvip_axi_item item  )
+	#bit get_address_ready()
+	#bit get_response_valid()
+	#tvip_axi_id get_response_id()
+	#tvip_axi_data get_response_data()
+	#tvip_axi_response get_response_status()
+	#logic get_response_last()
+	#drive_response_ready(bit ready)
+}
+class tvip_axi_master_driver extends tvip_axi_driver_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_master_monitor_base extends tue_param_monitor {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_master_monitor extends tvip_axi_monitor_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_master_write_monitor extends tvip_axi_master_monitor {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_master_write_monitor", uvm_component parent = null)
+}
+class tvip_axi_master_read_monitor extends tvip_axi_master_monitor {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_master_read_monitor", uvm_component parent = null)
+}
+class tvip_axi_master_read_sequence extends tvip_axi_master_access_sequence {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+constraint c_valid_access_type
+}
+class tvip_axi_master_sequencer_base extends tue_sequencer {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_master_sequencer extends tvip_axi_sequencer_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_master_sequence_base_base extends tue_sequence {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_master_sequence_base extends tvip_axi_sequence_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_master_sequence_base")
+}
+class tvip_axi_master_write_sequence extends tvip_axi_master_access_sequence {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+constraint c_valid_access_type
+}
+class tvip_axi_memory extends class {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_monitor_base extends tvip_axi_component_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+void build_phase(uvm_phase phase)
+	+run_phase(uvm_phase phase)
+	+end_address(tvip_axi_item item)
+	+end_write_data(tvip_axi_item item)
+	+end_response(tvip_axi_item item)
+	#{abstract}do_reset()
+	#main()
+	#address_monitor_thread()
+	#wait_for_address_valid()
+	#{abstract}sample_address(ref tvip_axi_item item)
+	#tvip_axi_id get_address_id()
+	#tvip_axi_address get_address()
+	#int get_burst_length()
+	#int get_burst_size()
+	#tvip_axi_burst_type get_burst_type()
+	#tvip_axi_memory_type get_memory_type()
+	#tvip_axi_protection get_protection()
+	#tvip_axi_qos get_qos()
+	#wait_for_address_ready()
+	#{abstract}finish_address(ref tvip_axi_item item)
+	#write_data_monitor_thread()
+	#wait_for_write_data_valid()
+	#tvip_axi_payload_store get_write_data_store()
+	#wait_for_write_data_ready()
+	#{abstract}sample_write_data(ref tvip_axi_payload_store store)
+	#tvip_axi_data get_write_data()
+	#tvip_axi_strobe get_strobe()
+	#bit get_write_data_last()
+	#response_mointor_thread()
+	#wait_for_response_valid()
+	#bit is_valid_response(tvip_axi_id id)
+	#wait_for_response_ready()
+	#{abstract}sample_response(    input tvip_axi_id id,    ref   bit         busy  )
+	#tvip_axi_id get_response_id()
+	#tvip_axi_response get_response()
+	#tvip_axi_data get_read_data()
+	#bit get_response_last()
+	#tvip_axi_item create_monitor_item()
+	#tvip_axi_payload_store write_data_stores[2][$]
+	#tvip_axi_payload_store response_stores[tvip_axi_id][$]
+}
+class tvip_axi_ral_adapter extends uvm_reg_adapter {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_ral_adapter")
+	+{abstract}uvm_sequence_item reg2bus(const ref uvm_reg_bus_op rw)
+	+{abstract}void bus2reg(uvm_sequence_item bus_item, ref uvm_reg_bus_op rw)
+	#{abstract}tvip_axi_id get_axi_id()
+	#uvm_status_e get_status(tvip_axi_item axi_item)
+}
+class tvip_axi_ral_predictor extends tue_reg_predictor {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_item_waiter extends tue_item_waiter {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	#bit match_key(KEY key, ITEM item)
+}
+class tvip_axi_sequencer_base extends BASE {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+void build_phase(uvm_phase phase)
+	+void connect_phase(uvm_phase phase)
+	#tvip_axi_item_waiter address_item_waiter
+	#tvip_axi_item_waiter request_item_waiter
+	#tvip_axi_item_waiter response_item_waiter
+	#tvip_axi_item_waiter item_waiter
+}
+class tvip_axi_sequence_base extends BASE {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_slave_agent_base extends tvip_axi_agent_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_slave_agent extends tvip_axi_slave_agent_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+void build_phase(uvm_phase phase)
+	+void connect_phase(uvm_phase phase)
+	+tvip_axi_slave_data_monitor data_monitor
+}
+class tvip_axi_slave_data_monitor extends tue_subscriber {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+void build_phase(uvm_phase phase)
+	+void write(tvip_axi_item t)
+	#tvip_axi_memory memory
+}
+class tvip_axi_slave_default_sequence extends tvip_axi_slave_sequence_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+body()
+	#process_response_request(tvip_axi_access_type access_type)
+	#{abstract}void randomize_response(    tvip_axi_access_type  access_type,    tvip_axi_slave_item   item  )
+	#{abstract}execute_response(tvip_axi_slave_item item)
+	#{abstract}int get_address_ready_delay(tvip_axi_slave_item item)
+	#{abstract}int get_write_data_ready_delay(tvip_axi_slave_item item, int index)
+	#{abstract}int get_response_start_delay(tvip_axi_slave_item item)
+	#{abstract}int get_response_delay(tvip_axi_slave_item item, int index)
+	#{abstract}tvip_axi_response get_response_status(tvip_axi_slave_item item, int index)
+	#{abstract}bit get_response_existence(tvip_axi_slave_item item, int index)
+	#{abstract}tvip_axi_data get_read_data(tvip_axi_slave_item item, int index)
+	#{abstract}bit get_read_data_existence(tvip_axi_slave_item item, int index)
+	#void overwrite_delay(    ref   int delay,    input int new_delay  )
+}
+class tvip_axi_slave_driver_item_queue extends tue_fifo {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_slave_sub_driver_base extends tvip_axi_sub_driver_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_slave_sub_driver extends tvip_axi_component_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+void build_phase(uvm_phase phase)
+	+run_phase(uvm_phase phase)
+	+put_request(tvip_axi_item request)
+	+begin_response(tvip_axi_item item)
+	#do_reset()
+	#{abstract}reset_if()
+	#main()
+	#drive_ready_thread(bit write_data_thread)
+	#wait_for_request_valid(bit write_data_thread)
+	#{abstract}bit get_request_valid(bit write_data_thread)
+	#get_ready_delay(    input bit                       write_data_thread,    input tvip_delay_configuration  delay_configuration,    ref   int                       delay  )
+	#int randomize_ready_delay(tvip_delay_configuration delay_configuration)
+	#{abstract}drive_ready(bit write_data_thread, bit ready)
+	#response_thread()
+	#get_next_response_item(ref tvip_axi_slave_driver_response_item item)
+	#bit no_response()
+	#bit is_acceptable_response(tvip_axi_id id)
+	#{abstract}int select_response()
+	#{abstract}int get_response_size(tvip_axi_slave_driver_response_item item)
+	#{abstract}int randomize_response_size(tvip_axi_slave_driver_response_item item)
+	#execute_response_item(tvip_axi_slave_driver_response_item item)
+	#{abstract}drive_response(bit valid, tvip_axi_slave_driver_response_item item)
+	#wait_for_response_ready()
+	#{abstract}bit get_response_ready()
+	#consume_delay(int delay)
+	#int ready_delay_queue[2][$]
+	#int preceded_ready_count[2]
+	#tvip_axi_slave_driver_start_delay_consumer start_delay_consumer
+	#tvip_axi_slave_driver_item_queue response_queue[tvip_axi_id]
+	#tvip_axi_slave_driver_response_item active_responses[$]
+	#tvip_axi_id active_ids[$]
+	#int current_response_index
+	+return 0
+}
+class tvip_axi_slave_write_driver extends tvip_axi_slave_sub_driver {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_slave_write_driver", uvm_component parent = null)
+	#reset_if()
+	#bit get_request_valid(bit write_data_thread)
+	#drive_ready(bit write_data_thread, bit ready)
+	#drive_response(bit valid, tvip_axi_slave_driver_response_item item)
+	#bit get_response_ready()
+}
+class tvip_axi_slave_read_driver extends tvip_axi_slave_sub_driver {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_slave_read_driver", uvm_component parent = null)
+	#reset_if()
+	#bit get_request_valid(bit write_data_thread)
+	#drive_ready(bit write_data_thread, bit ready)
+	#drive_response(bit valid, tvip_axi_slave_driver_response_item item)
+	#bit get_response_ready()
+}
+class tvip_axi_slave_driver extends tvip_axi_driver_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_slave_monitor_base extends tue_reactive_monitor {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_slave_monitor extends tvip_axi_monitor_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+begin_address(tvip_axi_item item)
+	+void write_request(tvip_axi_item item)
+}
+class tvip_axi_slave_write_monitor extends tvip_axi_slave_monitor {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_slave_write_monitor", uvm_component parent = null)
+}
+class tvip_axi_slave_read_monitor extends tvip_axi_slave_monitor {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_slave_read_monitor", uvm_component parent = null)
+}
+class tvip_axi_slave_sequencer_base extends tue_sequencer {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_slave_sequencer extends tvip_axi_sequencer_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+void build_phase(uvm_phase phase)
+	+{abstract}void write(tvip_axi_item request)
+	+{abstract}get_request(    input tvip_axi_access_type  access_type,    ref   tvip_axi_slave_item   request  )
+	#tvip_axi_item_waiter write_request_waiter
+	#tvip_axi_item_waiter read_request_waiter
+	#tvip_axi_item_waiter request_waiter[tvip_axi_access_type]
+}
+class tvip_axi_slave_sequence_base_base extends tue_sequence {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+}
+class tvip_axi_slave_sequence_base extends tvip_axi_sequence_base {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+new(string name = "tvip_axi_master_sequence_base")
+	+{abstract}get_request(    input tvip_axi_access_type  access_type,    ref   tvip_axi_slave_item   request  )
+	+{abstract}get_write_request(ref tvip_axi_slave_item request)
+	+{abstract}get_read_request(ref tvip_axi_slave_item request)
+}
+class tvip_axi_status extends tue_status {
+	Current class settled arguements
+--
+	CONFIGURATION:tvip_axi_configuration
+	STATUS:tvip_axi_status
+	REQ:tvip_axi_slave_item
+	WRITE_MONITOR:tvip_axi_slave_write_monitor
+	READ_MONITOR:tvip_axi_slave_read_monitor
+	SEQUENCER:tvip_axi_slave_sequencer
+	DRIVER:tvip_axi_slave_driver
+	ITEM:tvip_axi_slave_item
+	BASE:tvip_axi_slave_sequence_base_base
+	WRITE_DRIVER:tvip_axi_slave_write_driver
+	READ_DRIVER:tvip_axi_slave_read_driver
+	KEY:tvip_axi_id
+	T:tvip_axi_item
+==
+	Current class type arguements
+--
+	<WRITE_MONITOR> uvm_monitor
+	<READ_MONITOR> uvm_monitor
+	<SEQUENCER> uvm_sequencer
+	<DRIVER> uvm_driver
+	<BASE> uvm_sequence
+	<ITEM> uvm_sequence_item
+	<WRITE_DRIVER> uvm_component
+	<READ_DRIVER> uvm_component
+==
+	+tvip_axi_memory memory
+}
+@enduml

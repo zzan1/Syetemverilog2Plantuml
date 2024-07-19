@@ -11,8 +11,10 @@ It will recursively search all sv files with `.svh` suffix and will ignore `topt
 The plantuml code will print in console.
 Paste plantuml code to the editor on the [plantuml](https://www.plantuml.com/plantuml) website.
 
+if the row number of the generated plantuml code is more than 1000 rows, the on-line version plantuml might not be avaible. So that you need use local server, which you can find user guide on the [plantuml](https://www.plantuml.com/plantuml) website.
+
 ## Example
 
 Using [tvip-axi](https://github.com/taichi-ishitani/tvip-axi/) and generate following class structure.
 
-![class_diagram](./resource/class.svg).
+![class_diagram](./out/output/output.svg).
